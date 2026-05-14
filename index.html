@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Misión Internacional · Colombia 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --am:#D4890A;--ro:#C0392B;--ve:#1A6B3A;--mo:#6B2D8B;--mod:#4A1F65;
+  --bg:#F5F2EE;--card:#fff;--tx:#1C1C2E;--mu:#5C5C7A;--bo:#E4DDD6;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+.shell{max-width:480px;margin:0 auto;background:var(--bg);box-shadow:0 0 40px rgba(0,0,0,.12)}
+
+/* HERO */
+.hero{background:#fff;padding:1.5rem;border-bottom:3px solid var(--bo)}
+.hero-title{font-size:26px;font-weight:900;color:var(--mod);line-height:1.1;margin-bottom:4px}
+.hero-title span{color:var(--mo)}
+.hero-sub{font-size:12px;color:var(--mu);margin-bottom:12px}
+.strip{display:flex;height:4px;border-radius:2px;overflow:hidden;margin-bottom:14px}
+.strip span{flex:1}
+
+/* NAV */
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.nb{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px;border:1.5px solid var(--bo);border-radius:11px;background:#fafafa;color:var(--mu);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;cursor:pointer}
+.nb svg{width:20px;height:20px;stroke:var(--mu);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nb.on{background:var(--mo);border-color:var(--mo);color:#fff}
+.nb.on svg{stroke:#fff}
+
+/* SCREENS */
+.screen{display:none}.screen.on{display:block}
+
+/* CONTENT */
+.ct{padding:14px 14px 28px}
+
+/* SECTION HEAD */
+.sh{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--mo);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+.sh::after{content:'';flex:1;height:1.5px;background:linear-gradient(to right,var(--mo),transparent);opacity:.3;border-radius:1px}
+
+/* CARD */
+.card{background:var(--card);border-radius:14px;border:1px solid var(--bo);padding:14px;margin-bottom:11px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card h3{font-size:15px;font-weight:700;color:var(--tx);margin-bottom:7px}
+.card p,.card li{font-size:13px;color:var(--mu);line-height:1.6}
+.card ul{padding-left:1rem}
+.card li{margin-bottom:3px}
+
+/* TILES */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
+.tile{background:var(--card);border-radius:13px;border:1px solid var(--bo);padding:13px}
+.tile-l{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--mu);margin-bottom:3px}
+.tile-v{font-size:19px;font-weight:900;color:var(--mod);line-height:1}
+.tile-s{font-size:10px;color:var(--mu);margin-top:2px}
+
+/* PLACE CARD */
+.pc{background:var(--card);border-radius:14px;border:1px solid var(--bo);padding:13px;margin-bottom:10px}
+.pc h4{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:3px}
+.pc p{font-size:12px;color:var(--mu);line-height:1.5}
+.pc-meta{font-size:11px;color:var(--mu);margin-top:5px}
+.acts{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:4px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;padding:6px 12px;border-radius:7px;text-decoration:none;border:none;cursor:pointer}
+.btn-g{background:var(--ve);color:#fff}
+.btn-l{background:#F0ECF5;color:var(--mo);border:1.5px solid #D4BAE8}
+.btn-w{background:#25D366;color:#fff}
+
+/* TAG */
+.tag{display:inline-block;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.tm{background:#F0ECF5;color:var(--mo)}
+.tv{background:#E6F4EC;color:var(--ve)}
+.tr{background:#FDECEA;color:var(--ro)}
+.ta{background:#FEF5E4;color:#8A5A00}
+.tb{background:#E8EDF9;color:#1A3A8F}
+
+/* EMERGENCY */
+.emerg{background:var(--ro);border-radius:14px;padding:15px;display:flex;align-items:center;gap:14px;margin-bottom:11px;box-shadow:0 4px 14px rgba(192,57,43,.25)}
+.emerg-n{font-size:44px;font-weight:900;color:#fff;line-height:1}
+.emerg-t{color:#fff}
+.emerg-t strong{display:block;font-size:13px;margin-bottom:1px}
+.emerg-t span{font-size:11px;opacity:.85}
+
+/* ALERT */
+.alert{background:#FEF9EE;border-left:4px solid var(--am);border-radius:0 11px 11px 0;padding:11px 13px;margin-bottom:11px;font-size:12px;color:#6B4A0A;line-height:1.6}
+.alert strong{color:var(--am);font-weight:800}
+
+/* CONTACT ROW */
+.cr{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid #F5F0EC}
+.cr:last-child{border-bottom:none}
+.ci{font-size:20px;width:30px;text-align:center;flex-shrink:0;margin-top:2px}
+.cl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--mu);margin-bottom:2px}
+.cv{font-size:13px;font-weight:700;color:var(--tx)}
+.cs{font-size:11px;color:var(--mu)}
+
+/* WELCOME HL */
+.whl{background:var(--mo);border-radius:14px;padding:15px;margin-bottom:11px}
+.whl p{color:rgba(255,255,255,.9);font-size:13px;line-height:1.65}
+.whl strong{color:#F5D78E}
+
+/* FINAL BANNER */
+.fb{background:var(--ve);border-radius:14px;padding:18px;text-align:center;margin-top:14px}
+.fb h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:5px}
+.fb p{font-size:12px;color:rgba(255,255,255,.88);line-height:1.6}
+
+/* SCROLL TABS */
+.stabs{display:flex;overflow-x:auto;gap:7px;padding:10px 14px;background:#fff;border-bottom:1px solid var(--bo);position:sticky;top:0;z-index:50;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.st{flex-shrink:0;background:#F0ECF5;color:var(--mo);border:1.5px solid transparent;border-radius:18px;padding:5px 13px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.st.on{background:var(--mo);color:#fff;border-color:var(--mo)}
+
+/* SUB CONTENT */
+.sub{display:none}.sub.on{display:block}
+
+/* REST TABS */
+.rtabs{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.rt{flex:1;background:#F5F2EE;color:var(--mu);border:1.5px solid var(--bo);border-radius:9px;padding:7px 5px;font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;cursor:pointer;text-align:center}
+.rt.on{background:var(--ve);color:#fff;border-color:var(--ve)}
+
+/* AGENDA */
+.aday{background:var(--card);border-radius:14px;border:1px solid var(--bo);overflow:hidden;margin-bottom:12px}
+.adh{display:flex;align-items:center;gap:12px;padding:13px 14px;color:#fff;cursor:pointer;user-select:none}
+.adn{font-size:38px;font-weight:900;line-height:1;opacity:.95}
+.adt{font-weight:800;font-size:14px}
+.add{font-size:11px;opacity:.82;margin-top:2px}
+.atog{margin-left:auto;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.atog svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.abw{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.aday.open .abw{max-height:1500px}
+.aday.open .atog svg{transform:rotate(180deg)}
+.ae{display:flex;gap:11px;padding:11px 14px;border-bottom:1px solid #F5F0EC}
+.ae:last-child{border-bottom:none}
+.at{font-size:11px;font-weight:800;color:var(--mo);min-width:48px;flex-shrink:0;padding-top:2px;text-align:right}
+.ab{flex:1}
+.aet{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:3px}
+.aloc{font-size:11px;color:var(--ve);font-weight:700;margin-bottom:5px}
+.ali{padding-left:.9rem;margin-top:3px}
+.ali li{font-size:12px;color:var(--mu);line-height:1.5;margin-bottom:2px}
+
+/* APP ROW */
+.ar{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid #F5F0EC}
+.ar:last-child{border-bottom:none}
+
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.screen.on{animation:fi .2s ease}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">Guía de<br><span>Misión Internacional</span></div>
+  <div class="hero-sub">Acompañamiento Electoral · Colombia 2026</div>
+  <div class="strip">
+    <span style="background:#D4890A"></span>
+    <span style="background:#C0392B"></span>
+    <span style="background:#1A6B3A"></span>
+    <span style="background:#6B2D8B"></span>
+    <span style="background:#F9D342"></span>
+  </div>
+  <div class="nav" id="nav">
+    <button class="nb on" onclick="go('inicio',this)">
+      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>Inicio
+    </button>
+    <button class="nb" onclick="go('llegada',this)">
+      <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0011 2a1.5 1.5 0 00-1.5 1.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>Llegada
+    </button>
+    <button class="nb" onclick="go('hoteles',this)">
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Hoteles
+    </button>
+    <button class="nb" onclick="go('cultura',this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cultura
+    </button>
+    <button class="nb" onclick="go('seguridad',this)">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Seguridad
+    </button>
+    <button class="nb" onclick="go('contactos',this)">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Contactos
+    </button>
+  </div>
+</div>
+
+<!-- ===== INICIO ===== -->
+<div class="screen on" id="screen-inicio">
+  <div class="ct">
+    <div class="whl">
+      <p>Bienvenidas y bienvenidos a Colombia. Agradecemos su compromiso con el <strong>acompañamiento democrático</strong>, los derechos humanos y la <strong>observación internacional</strong>.</p>
+    </div>
+
+    <div class="tiles">
+      <div class="tile"><div class="tile-l">Capital</div><div class="tile-v">Bogotá</div><div class="tile-s">D.C., Colombia</div></div>
+      <div class="tile"><div class="tile-l">Moneda</div><div class="tile-v">COP</div><div class="tile-s">Peso colombiano</div></div>
+      <div class="tile"><div class="tile-l">Idioma</div><div class="tile-v" style="font-size:15px">Español</div></div>
+      <div class="tile"><div class="tile-l">Altitud</div><div class="tile-v">2.600m</div><div class="tile-s">Sobre el mar</div></div>
+    </div>
+
+    <div class="card">
+      <h3>🌡️ Clima en Bogotá</h3>
+      <p style="margin-bottom:7px">Temperatura entre <strong>8°C y 19°C</strong>. Los cambios climáticos durante el día son habituales.</p>
+      <ul>
+        <li>Llevar ropa por capas</li>
+        <li>Chaqueta impermeable ligera</li>
+        <li>Zapatos cómodos para caminar</li>
+        <li>Hidratarse bien por la altitud</li>
+      </ul>
+    </div>
+
+    <div class="sh">📅 Agenda Oficial · 29 mayo – 1 junio</div>
+
+    <!-- DÍA 29 -->
+    <div class="aday" id="d29">
+      <div class="adh" style="background:var(--am)" onclick="tog('d29')">
+        <span class="adn">29</span>
+        <div><div class="adt">Viernes · Instalación</div><div class="add">29 de mayo de 2026</div></div>
+        <div class="atog"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="abw">
+        <div class="ae">
+          <div class="at">8:00 am</div>
+          <div class="ab">
+            <div class="aet">Instalación Formal de la Misión de Observación Internacional</div>
+            <div style="font-size:10px;font-weight:800;color:var(--mu);text-transform:uppercase;margin-bottom:5px">Evento del CNE</div>
+            <div class="aloc">📍 Salón Grand Ballroom, Hotel Grand Hyatt (Primer Piso)</div>
+            <ul class="ali"><li>Presentación oficial de la Misión y acto de bienvenida</li></ul>
+          </div>
+        </div>
+        <div class="ae">
+          <div class="at" style="color:var(--mu)">7:00 pm</div>
+          <div class="ab">
+            <div class="aet">Encuentro de Bienvenida — Misión Internacional</div>
+            <div class="aloc">📍 Sede del Pacto Histórico · Cra. 17a #37-27, Bogotá</div>
+            <ul class="ali"><li>Evento de bienvenida con congresistas del Pacto Histórico</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 30 -->
+    <div class="aday" id="d30">
+      <div class="adh" style="background:var(--mo)" onclick="tog('d30')">
+        <span class="adn">30</span>
+        <div><div class="adt">Sábado · Actividades Centrales</div><div class="add">30 de mayo de 2026</div></div>
+        <div class="atog"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="abw">
+        <div class="ae">
+          <div class="at">9:00 am</div>
+          <div class="ab">
+            <div class="aet">Rueda de Prensa — Bienvenida</div>
+            <div class="aloc">📍 Sede del Pacto Histórico · Cra. 17a #37-27, Bogotá</div>
+            <ul class="ali"><li><strong>Participantes:</strong> Iván Cepeda, Aida Quilcué, Misión Internacional, Alirio Uribe</li></ul>
+          </div>
+        </div>
+        <div class="ae">
+          <div class="at">10:00 am</div>
+          <div class="ab">
+            <div class="aet">Diálogo con Organizaciones Sociales</div>
+            <div class="aloc">📍 Sede del Pacto Histórico · Cra. 17a #37-27, Bogotá</div>
+          </div>
+        </div>
+        <div class="ae">
+          <div class="at" style="color:var(--mu)">Tarde</div>
+          <div class="ab">
+            <div class="aet">Tarde Libre — Delegación Internacional</div>
+            <p style="font-size:12px;color:var(--mu);font-style:italic">Tiempo disponible para actividades de la misión.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 31 -->
+    <div class="aday" id="d31">
+      <div class="adh" style="background:var(--ro)" onclick="tog('d31')">
+        <span class="adn">31</span>
+        <div><div class="adt">Domingo · Jornada Electoral</div><div class="add">31 de mayo de 2026 — Día de Elecciones</div></div>
+        <div class="atog"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="abw">
+        <div class="ae">
+          <div class="at">7:00 am</div>
+          <div class="ab">
+            <div class="aet">Punto de Encuentro</div>
+            <div class="aloc">📍 Plaza de Bolívar</div>
+          </div>
+        </div>
+        <div class="ae">
+          <div class="at">8:00 am</div>
+          <div class="ab">
+            <div class="aet">Recorrido de Observación Electoral a Puestos de Votación</div>
+          </div>
+        </div>
+        <div class="ae">
+          <div class="at">1:00 pm</div>
+          <div class="ab">
+            <div class="aet">Continuación del Recorrido de Observación</div>
+          </div>
+        </div>
+        <div class="ae">
+          <div class="at">5–6 pm</div>
+          <div class="ab">
+            <div class="aet">Cierre de Jornada Electoral — Conteo y Escrutinio</div>
+            <div class="aloc">📍 Hotel Tequendama / Sede del Partido</div>
+            <ul class="ali"><li>Evento de cierre con presentación de resultados</li></ul>
+          </div>
+        </div>
+        <div class="ae">
+          <div class="at">8:00 pm</div>
+          <div class="ab">
+            <div class="aet">Evento de Celebración 🎉</div>
+            <div class="aloc">📍 Sede del Pacto Histórico · Cra. 17a #37-27, Bogotá</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 1 JUNIO -->
+    <div class="aday" id="d01">
+      <div class="adh" style="background:var(--ve)" onclick="tog('d01')">
+        <span class="adn">1</span>
+        <div><div class="adt">Lunes · Evaluación y Análisis</div><div class="add">1 de junio de 2026</div></div>
+        <div class="atog"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="abw">
+        <div class="ae">
+          <div class="at">9:00 am</div>
+          <div class="ab">
+            <div class="aet">Evaluación de la Misión Internacional</div>
+            <div class="aloc">📍 Sede del Pacto Histórico · Cra. 17a #37-27, Bogotá</div>
+            <p style="font-size:12px;color:var(--mu);margin-top:3px">Análisis de la jornada y conclusiones de la misión.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb">
+      <h3>¡Bienvenidas y bienvenidos a Colombia! 🇨🇴</h3>
+      <p>Un país de profundas complejidades y enormes capacidades de resiliencia, creatividad y construcción colectiva de paz.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LLEGADA ===== -->
+<div class="screen" id="screen-llegada">
+  <div class="ct">
+    <div class="sh">✈️ Aeropuerto</div>
+    <div class="pc">
+      <span class="tag tb">Internacional</span>
+      <h4>Aeropuerto El Dorado</h4>
+      <p>La mayoría de vuelos internacionales llegan aquí. Uno de los más modernos de América Latina.</p>
+      <p class="pc-meta">📍 Ac. 26 #103-09, Fontibón · ☎️ +57 601 266 2000</p>
+      <div class="acts">
+        <a href="https://maps.google.com/?q=Aeropuerto+El+Dorado+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a>
+        <a href="https://www.aerocivil.gov.co" class="btn btn-l" target="_blank">↗ Web oficial</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>⚠️ Al llegar</h3>
+      <ul>
+        <li>Usar solo <strong>transporte autorizado</strong></li>
+        <li>Evitar taxis informales en la calle</li>
+        <li>Cambiar dinero en <strong>casas de cambio oficiales</strong></li>
+        <li>Llevar documentos consigo en todo momento</li>
+        <li>Informar incidencias al equipo coordinador</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🚗 Transporte recomendado: Uber</h3>
+      <p style="margin-bottom:9px">Mayor trazabilidad de recorridos y movilidad segura. <strong>Evitar transporte informal.</strong></p>
+      <a href="https://www.uber.com" class="btn btn-l" target="_blank">↗ Descargar Uber</a>
+    </div>
+    <div class="alert"><strong>🗓️ Día de elecciones:</strong> Se activará un <strong>código promocional especial</strong> de Uber para delegaciones internacionales. Info por el canal oficial de WhatsApp.</div>
+  </div>
+</div>
+
+<!-- ===== HOTELES ===== -->
+<div class="screen" id="screen-hoteles">
+  <div class="stabs" id="htabs">
+    <button class="st on" onclick="swH('hoteles',this)">🏨 Hoteles</button>
+    <button class="st" onclick="swH('restaurantes',this)">🍽️ Restaurantes</button>
+  </div>
+  <div class="ct">
+    <div class="sub on" id="h-hoteles">
+      <div class="sh">🏨 Alojamiento recomendado</div>
+      <div class="pc">
+        <span class="tag ta">Tradicional</span>
+        <h4>Hotel Tequendama</h4>
+        <p>Uno de los hoteles más emblemáticos de Bogotá. Ubicación estratégica para reuniones institucionales.</p>
+        <p class="pc-meta">📍 Cra. 10 #26-21, Bogotá</p>
+        <div class="acts">
+          <a href="https://maps.google.com/?q=Hotel+Tequendama+Cra+10+%2326-21+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a>
+          <a href="https://wa.me/message/JJVVW4EFXG5XA1" class="btn btn-l" target="_blank">💬 Reservar</a>
+        </div>
+      </div>
+      <div class="pc">
+        <span class="tag tv">Céntrico</span>
+        <h4>Hotel Grand Park</h4>
+        <p>Cerca del Centro Internacional y La Candelaria. Buena conectividad a espacios culturales y políticos.</p>
+        <p class="pc-meta">📍 Cra. 5 #23-34, Bogotá</p>
+        <div class="acts">
+          <a href="https://maps.google.com/?q=Cra+5+%2323-34+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a>
+          <a href="https://wa.me/message/VCZLKRLAQSB4I1" class="btn btn-l" target="_blank">💬 Reservar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub" id="h-restaurantes">
+      <div class="rtabs" id="rtabs">
+        <button class="rt on" onclick="swR('trad',this)">🍲 Tradicional</button>
+        <button class="rt" onclick="swR('veg',this)">🌱 Vegano</button>
+        <button class="rt" onclick="swR('cafe',this)">☕ Cafés</button>
+      </div>
+      <div class="sub on" id="r-trad">
+        <div class="sh">🍲 Cocina Tradicional</div>
+        <div class="pc"><span class="tag ta">Típico</span><h4>La Cucharita Colombiana</h4><p>Platos típicos colombianos cerca del Centro Internacional.</p><div class="acts"><a href="https://maps.google.com/?q=La+Cucharita+Colombiana+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+        <div class="pc"><span class="tag ta">Histórico · Desde 1816</span><h4>La Puerta Falsa</h4><p>El restaurante más emblemático de Bogotá. Tamales, chocolate santafereño y ajiaco bogotano.</p><p class="pc-meta">📍 Cl. 11 #6-50, La Candelaria</p><div class="acts"><a href="https://maps.google.com/?q=La+Puerta+Falsa+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+        <div class="pc"><span class="tag ta">Mercado</span><h4>Plaza La Perseverancia</h4><p>Cocinas regionales y almuerzos típicos. Experiencia auténtica.</p><div class="acts"><a href="https://maps.google.com/?q=Plaza+La+Perseverancia+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      </div>
+      <div class="sub" id="r-veg">
+        <div class="sh">🌱 Vegetariano y Vegano</div>
+        <div class="pc"><span class="tag tv">Vegetariano</span><h4>Zukini Restaurante</h4><p>Comida casera y ambiente tranquilo, cerca del Centro Internacional.</p><div class="acts"><a href="https://maps.google.com/?q=Zukini+Restaurante+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+        <div class="pc"><span class="tag tv">Vegano</span><h4>Naturalmente Vegano</h4><p>Cocina vegana basada en ingredientes locales.</p><div class="acts"><a href="https://maps.google.com/?q=Naturalmente+Vegano+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+        <div class="pc"><span class="tag tv">Vegano</span><h4>Mestizo Vegano</h4><p>Centro Internacional, cerca de los hoteles recomendados.</p><div class="acts"><a href="https://maps.google.com/?q=Mestizo+Vegano+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      </div>
+      <div class="sub" id="r-cafe">
+        <div class="sh">☕ Cafés</div>
+        <div class="pc"><h4>Boca Cocina Latina</h4><p>Excelente para desayunos, cafés y reuniones informales cerca del sector Tequendama.</p><div class="acts"><a href="https://maps.google.com/?q=Boca+Cocina+Latina+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+        <div class="pc"><h4>Wok Museo Nacional</h4><p>Accesible desde el Centro Internacional, opciones vegetarianas y ambiente para reuniones.</p><div class="acts"><a href="https://maps.google.com/?q=Wok+Museo+Nacional+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CULTURA ===== -->
+<div class="screen" id="screen-cultura">
+  <div class="stabs" id="ctabs">
+    <button class="st on" onclick="swC('mem',this)">🕊️ Memoria</button>
+    <button class="st" onclick="swC('arte',this)">🎨 Arte</button>
+    <button class="st" onclick="swC('lug',this)">📍 Lugares</button>
+    <button class="st" onclick="swC('soc',this)">🤝 Social</button>
+  </div>
+  <div class="ct">
+    <div class="sub on" id="c-mem">
+      <div class="sh">🕊️ Memoria, Paz y DDHH</div>
+      <div class="pc"><span class="tag tm">Memoria</span><h4>Centro de Memoria, Paz y Reconciliación</h4><p>Espacio dedicado a las víctimas del conflicto armado y la construcción de paz.</p><p class="pc-meta">📍 Cra. 19b #24-86 · Entrada libre</p><div class="acts"><a href="https://maps.google.com/?q=Centro+de+Memoria+Paz+y+Reconciliación+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      <div class="pc"><span class="tag tm">Arte y Memoria</span><h4>Fragmentos, Espacio de Arte y Memoria</h4><p>Instalación artística creada a partir de armas fundidas tras el Acuerdo de Paz de 2016.</p><div class="acts"><a href="https://maps.google.com/?q=Fragmentos+Espacio+Arte+Memoria+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      <div class="pc"><span class="tag tb">Historia nacional</span><h4>Museo Nacional de Colombia</h4><p>Recorrido histórico y social. Entrada libre miércoles 3–5pm.</p><p class="pc-meta">📍 Ak 7 #28-66 · Mar–Dom 9am–5pm</p><div class="acts"><a href="https://maps.google.com/?q=Museo+Nacional+de+Colombia" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+    </div>
+    <div class="sub" id="c-arte">
+      <div class="sh">🎨 Arte y Cultura</div>
+      <div class="pc"><h4>Museo Botero</h4><p>Arte colombiano e internacional. Colección personal de Fernando Botero. Entrada gratuita.</p><div class="acts"><a href="https://maps.google.com/?q=Museo+Botero+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      <div class="pc"><h4>Museo de Arte Miguel Urrutia</h4><p>Arte y cultura visual colombiana. Colección permanente de gran valor patrimonial.</p><div class="acts"><a href="https://maps.google.com/?q=Museo+de+Arte+Miguel+Urrutia+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      <div class="pc"><span class="tag tr">Tour urbano</span><h4>Graffiti Tour – La Candelaria</h4><p>Recorrido enfocado en memoria histórica, protesta social y transformación urbana.</p><div class="acts"><a href="https://maps.google.com/?q=La+Candelaria+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+    </div>
+    <div class="sub" id="c-lug">
+      <div class="sh">📍 Lugares de interés</div>
+      <div class="pc"><span class="tag tm">Ícono de Bogotá</span><h4>Monserrate</h4><p>Vista panorámica desde 3.152 metros. Acceso en funicular, teleférico o senderismo.</p><div class="acts"><a href="https://maps.google.com/?q=Monserrate+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      <div class="pc"><span class="tag tr">Centro histórico</span><h4>Plaza de Bolívar</h4><p>Centro político e histórico del país. Corazón de La Candelaria.</p><div class="acts"><a href="https://maps.google.com/?q=Plaza+de+Bolívar+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+      <div class="pc"><span class="tag tb">Cultural</span><h4>Biblioteca Luis Ángel Arango</h4><p>Uno de los principales centros culturales de América Latina. Exposiciones y conciertos.</p><div class="acts"><a href="https://maps.google.com/?q=Biblioteca+Luis+Angel+Arango+Bogotá" class="btn btn-g" target="_blank">📍 Maps</a></div></div>
+    </div>
+    <div class="sub" id="c-soc">
+      <div class="sh">🤝 Organizaciones y procesos sociales</div>
+      <div class="card">
+        <p style="margin-bottom:9px">Durante la misión podrán realizarse encuentros con:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="tag tm">Organizaciones de víctimas</span>
+          <span class="tag tr">Colectivos feministas</span>
+          <span class="tag tb">Organizaciones juveniles</span>
+          <span class="tag tv">Medios comunitarios</span>
+          <span class="tag ta">Firmantes del acuerdo de paz</span>
+          <span class="tag tv">Org. indígenas y afrocolombianas</span>
+          <span class="tag tm">Iniciativas de construcción de paz</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SEGURIDAD ===== -->
+<div class="screen" id="screen-seguridad">
+  <div class="ct">
+    <div class="emerg">
+      <div class="emerg-n">123</div>
+      <div class="emerg-t"><strong>Número de Emergencias</strong><span>Policía · Bomberos · Ambulancia<br>Disponible 24/7 en todo Colombia</span></div>
+    </div>
+    <div class="card"><h3>🛡️ Recomendaciones generales</h3><ul><li>No mostrar objetos de valor en la calle</li><li>Usar transporte confiable (Uber)</li><li>No caminar solo/a en zonas desconocidas de noche</li><li>Mantener <strong>copia digital</strong> del pasaporte</li><li>Informar desplazamientos al equipo coordinador</li><li>Verificar trayectos antes de salir</li></ul></div>
+    <div class="card"><h3>💊 Salud y altitud</h3><ul><li>Hidratación constante es fundamental</li><li>Las primeras 24h en altitud pueden afectar</li><li>Usar protector solar (la altura aumenta la radiación)</li><li>Tener <strong>seguro médico internacional</strong> activo</li></ul></div>
+    <div class="alert"><strong>💡 Consejo:</strong> Guarda todos los contactos importantes en tu teléfono antes de llegar y comparte tu ubicación con el equipo al aterrizar.</div>
+  </div>
+</div>
+
+<!-- ===== CONTACTOS ===== -->
+<div class="screen" id="screen-contactos">
+  <div class="ct">
+    <div class="emerg">
+      <div class="emerg-n">123</div>
+      <div class="emerg-t"><strong>Emergencias Nacionales</strong><span>Disponible 24 horas · Todo el país</span></div>
+    </div>
+    <div class="sh">📋 Equipo de la misión</div>
+    <div class="card">
+      <div class="cr">
+        <div class="ci">🧑‍💼</div>
+        <div>
+          <div class="cl">Coordinación General</div>
+          <div class="cs" style="font-style:italic;color:#C0B8C8">Pendiente – agregar nombre y teléfono</div>
+          <a href="mailto:comiteinternacional@movimientopactohistorico.co" class="btn btn-l" style="margin-top:7px;font-size:10px">✉️ comiteinternacional@movimientopactohistorico.co</a>
+        </div>
+      </div>
+      <div class="cr">
+        <div class="ci">💬</div>
+        <div>
+          <div class="cl">Canal oficial WhatsApp</div>
+          <div class="cs">Anuncios, agenda, logística y alertas de la misión</div>
+          <a href="https://whatsapp.com/channel/0029Vb8D6H46GcGNs7ljlI0d" class="btn btn-w" style="margin-top:8px" target="_blank">💬 Unirse al Canal</a>
+        </div>
+      </div>
+    </div>
+    <div class="alert"><strong>📌 Recuerda:</strong> El canal oficial de WhatsApp es el primer punto de contacto ante cualquier situación. Guarda todos los números antes de llegar a Colombia.</div>
+  </div>
+</div>
+
+</div><!-- shell -->
+
+<script>
+function go(id, btn) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('#nav .nb').forEach(b => b.classList.remove('on'));
+  document.getElementById('screen-' + id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function tog(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+function swH(id, btn) {
+  document.querySelectorAll('#h-hoteles,#h-restaurantes').forEach(el => el.classList.remove('on'));
+  document.getElementById('h-' + id).classList.add('on');
+  document.querySelectorAll('#htabs .st').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+function swR(id, btn) {
+  document.querySelectorAll('#r-trad,#r-veg,#r-cafe').forEach(el => el.classList.remove('on'));
+  document.getElementById('r-' + id).classList.add('on');
+  document.querySelectorAll('#rtabs .rt').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+function swC(id, btn) {
+  document.querySelectorAll('#c-mem,#c-arte,#c-lug,#c-soc').forEach(el => el.classList.remove('on'));
+  document.getElementById('c-' + id).classList.add('on');
+  document.querySelectorAll('#ctabs .st').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+</script>
+</body>
+</html>
